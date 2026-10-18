@@ -14,9 +14,11 @@ hal_attribute_hwservice(hal_motor, hal_motor_hwservice)
 allow hal_motor_default hall_device:chr_file rw_file_perms;
 allow hal_motor_default motor_device:chr_file rw_file_perms;
 
-# Allow hal_motor_default to read and write to persist sensors files
+# Allow hal_motor_default to read, write and create persist sensors files
+# (the calibration writes /mnt/vendor/persist/sensors/hall_calidata.txt,
+# which does not exist until the first calibration)
 allow hal_motor_default vendor_persist_sensors_file:dir rw_dir_perms;
-allow hal_motor_default vendor_persist_sensors_file:file rw_file_perms;
+allow hal_motor_default vendor_persist_sensors_file:file create_file_perms;
 
 # Allow hal_motor_default to set motor properties
 set_prop(hal_motor_default, vendor_motor_prop)
