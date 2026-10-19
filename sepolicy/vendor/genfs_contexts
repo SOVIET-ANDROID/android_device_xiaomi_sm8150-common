@@ -202,3 +202,4 @@ genfscon sysfs /devices/platform/soc/8300000.qcom,turing/subsys7/wakeup         
 genfscon sysfs /devices/platform/soc/aae0000.qcom,venus/wakeup                                                                                        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/aae0000.qcom,venus/subsys8/wakeup                                                                                u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/c8c000.qcom,qup_uart/wakeup                                                                                      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/8c0000.geniqup/890000.i2c/i2c-2/2-0010/890000.i2c:qcom,smb1390@10:qcom,charge_pump/power_supply/charge_pump_master u:object_r:vendor_sysfs_battery_supply:s0
