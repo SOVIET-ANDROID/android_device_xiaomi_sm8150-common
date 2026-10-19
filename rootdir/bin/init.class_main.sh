@@ -127,18 +127,23 @@ case "$baseband" in
         fi
     fi
 
-    case "$datamode" in
-        "tethered")
-            start vendor.dataqti
-            start vendor.dataadpl
-            ;;
-        "concurrent")
-            start vendor.dataqti
-            start vendor.dataadpl
-            ;;
-        *)
-            ;;
-    esac
+    # dataqti/dataadpl bridge USB RmNet tethering; without a USB RmNet
+    # control device (the 6.12 kernel has none) qti gives up after 10 tries
+    # and init restarts it forever.
+    if [ -e /dev/rmnet_ctrl ] || [ -e /dev/rmnet_ctrl0 ]; then
+        case "$datamode" in
+            "tethered")
+                start vendor.dataqti
+                start vendor.dataadpl
+                ;;
+            "concurrent")
+                start vendor.dataqti
+                start vendor.dataadpl
+                ;;
+            *)
+                ;;
+        esac
+    fi
 esac
 
 #
