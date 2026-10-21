@@ -81,8 +81,13 @@ BOARD_BOOT_HEADER_VERSION := 2
 endif
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.usbcontroller=a600000.dwc3
+# raphael-6.12 kernel (prebuilt from raphael-6-12/android_kernel_xiaomi_sm8150,
+# branch raphael-6.12): its own cmdline, the msm-5.4 knobs do not exist there.
+BOARD_KERNEL_CMDLINE := printk.devkmsg=on clk_ignore_unused pd_ignore_unused panic=60 androidboot.hardware=qcom androidboot.memcg=1 swiotlb=2048 androidboot.usbcontroller=a600000.dwc3
 BOARD_KERNEL_CMDLINE += androidboot.fstab_suffix=qcom
+BOARD_KERNEL_CMDLINE += msm_drm.dsi_display0=dsi_ss_fhd_ea8076_cmd_display:
+BOARD_KERNEL_CMDLINE += raphael.ro_parts=modemst1,modemst2,fsg,fsc
+BOARD_KERNEL_CMDLINE += sysctl.kernel.firmware_config.force_sysfs_fallback=1
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 ifneq ($(TARGET_IS_LEGACY),true)
 BOARD_KERNEL_IMAGE_NAME := Image
@@ -90,8 +95,13 @@ else
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 endif
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_KERNEL_SEPARATED_DTBO := false
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+# Prebuilt raphael-6.12 kernel, dtb and the dtbo the phone runs with it.
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := device/xiaomi/raphael-kernel/Image.gz
+BOARD_PREBUILT_DTBIMAGE_DIR := device/xiaomi/raphael-kernel/dtbs
+BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/raphael-kernel/dtbo.img
 TARGET_KERNEL_NO_GCC := true
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8150
 TARGET_KERNEL_CONFIG := \

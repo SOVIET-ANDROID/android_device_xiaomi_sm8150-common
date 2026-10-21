@@ -1,2 +1,4 @@
 # eBPF
-ro.bpf.kver_override=5.10.239
+
+# raphael-6.12: the vendor Adreno GL HWUI path loses text after suspend; Vulkan HWUI does not
+debug.hwui.renderer=skiavk
