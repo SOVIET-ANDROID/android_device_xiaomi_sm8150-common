@@ -129,18 +129,6 @@
             "ResetOnInit": true
         },
         {
-            "Name": "TAUClampLatency",
-            "Paths": [
-                "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive"
-            ],
-            "Values": [
-                "1",
-                "0"
-            ],
-            "DefaultIndex": 0,
-            "ResetOnInit": true
-        },
-        {
             "Name": "FGUClampBoost",
             "Paths": [
                 "/dev/cpuctl/foreground/cpu.uclamp.min"
@@ -608,12 +596,6 @@
         },
         {
             "PowerHint": "INTERACTION",
-            "Node": "TAUClampLatency",
-            "Duration": 200,
-            "Value": "1"
-        },
-        {
-            "PowerHint": "INTERACTION",
             "Node": "UfsClkGateEnable",
             "Duration": 200,
             "Value": "0"
@@ -776,12 +758,6 @@
             "Node": "TAUClampBoost",
             "Duration": 3000,
             "Value": "40"
-        },
-        {
-            "PowerHint": "LAUNCH",
-            "Node": "TAUClampLatency",
-            "Duration": 3000,
-            "Value": "1"
         },
         {
             "PowerHint": "LAUNCH",
@@ -1042,12 +1018,6 @@
             "Node": "FGUClampBoost",
             "Duration": 50,
             "Value": "20"
-        },
-        {
-            "PowerHint": "DISPLAY_UPDATE_IMMINENT",
-            "Node": "TAUClampLatency",
-            "Duration": 50,
-            "Value": "1"
         },
         {
             "PowerHint": "ML_ACC",
