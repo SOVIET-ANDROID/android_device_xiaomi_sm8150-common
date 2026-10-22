@@ -1,3 +1,8 @@
+# ADPF
+debug.hwui.use_hint_manager=true
+debug.sf.enable_adpf_cpu_hint=true
+debug.sf.enable_adpf_gpu_hint=true
+
 # Audio
 audio.offload.min.duration.secs=30
 persist.vendor.audio.hac.enable=false
