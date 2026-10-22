@@ -1,0 +1,8 @@
+
+# raphael-6.12: app compaction (process_madvise MADV_PAGEOUT) makes the kernel
+# check write permission on every file-backed mapping of the target app in
+# system_server's context (mm/madvise.c can_do_file_pageout). Apps map
+# /dev/vndbinder and ashmem/memfd regions; the check fails harmlessly (those
+# VMAs are just not paged out) but audits on every freeze. msm-5.4 did not.
+dontaudit system_server vndbinder_device:chr_file write;
+dontaudit system_server tmpfs:file write;
