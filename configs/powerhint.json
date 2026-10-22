@@ -1459,7 +1459,7 @@
             "ReportingRateLimitNs": 166666660,
             "TargetTimeFactor": 1.0,
             "StaleTimeFactor": 15.0,
-            "GpuBoost": false,
+            "GpuBoost": true,
             "HeuristicBoost_On": true,
             "HBoostModerateJankThreshold": 2,
             "HBoostOffMaxAvgDurRatio": 4.0,
@@ -1475,7 +1475,8 @@
             ],
             "JankCheckTimeFactor": 1.2,
             "LowFrameRateThreshold": 25,
-            "MaxRecordsNum": 300
+            "MaxRecordsNum": 300,
+            "GpuCapacityBoostMax": 25000
         },
         {
             "Name": "SYSTEM_UI_PROFILE",
@@ -1502,7 +1503,7 @@
             "ReportingRateLimitNs": 166666660,
             "TargetTimeFactor": 1.0,
             "StaleTimeFactor": 15.0,
-            "GpuBoost": false,
+            "GpuBoost": true,
             "HeuristicBoost_On": true,
             "HBoostModerateJankThreshold": 2,
             "HBoostOffMaxAvgDurRatio": 4.0,
@@ -1518,7 +1519,11 @@
             ],
             "JankCheckTimeFactor": 1.2,
             "LowFrameRateThreshold": 25,
-            "MaxRecordsNum": 300
+            "MaxRecordsNum": 300,
+            "GpuCapacityBoostMax": 25000
         }
-    ]
+    ],
+    "OtherConfigs": {
+        "GpuSysfsPath": "/sys/class/kgsl/kgsl-3d0"
+    }
 }
