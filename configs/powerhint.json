@@ -984,13 +984,52 @@
             "PowerHint": "EXPENSIVE_RENDERING",
             "Node": "GPUMinFreq",
             "Duration": 0,
-            "Value": "1"
+            "Value": "3"
         },
         {
             "PowerHint": "EXPENSIVE_RENDERING",
             "Node": "GPUMaxFreq",
             "Duration": 0,
             "Value": "0"
+        },
+        {
+            "PowerHint": "CPU_LOAD_RESET",
+            "Node": "GPUMinFreq",
+            "Duration": 50,
+            "Value": "3",
+            "EnableProperty": "vendor.powerhal.load_reset_boost"
+        },
+        {
+            "PowerHint": "CPU_LOAD_RESET",
+            "Node": "CPUBWMinFreq",
+            "Duration": 33,
+            "Value": "9155",
+            "EnableProperty": "vendor.powerhal.load_reset_boost"
+        },
+        {
+            "PowerHint": "CPU_LOAD_RESET",
+            "Node": "LLCCBWMinFreq",
+            "Duration": 33,
+            "Value": "2597",
+            "EnableProperty": "vendor.powerhal.load_reset_boost"
+        },
+        {
+            "PowerHint": "FIXED_PERFORMANCE",
+            "Node": "CPULittleClusterMinFreq",
+            "Duration": 0,
+            "Value": "9999999"
+        },
+        {
+            "PowerHint": "FIXED_PERFORMANCE",
+            "Node": "CPUBigClusterMinFreq",
+            "Duration": 0,
+            "Value": "9999999"
+        },
+        {
+            "PowerHint": "FIXED_PERFORMANCE",
+            "Node": "CPUBigPlusClusterMinFreq",
+            "Duration": 0,
+            "Value": "9999999"
         },
         {
             "PowerHint": "DISPLAY_UPDATE_IMMINENT",
