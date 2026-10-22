@@ -81,14 +81,17 @@ BOARD_BOOT_HEADER_VERSION := 2
 endif
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
-# raphael-6.12 kernel (prebuilt from raphael-6-12/android_kernel_xiaomi_sm8150,
-# branch raphael-6.12): its own cmdline, the msm-5.4 knobs do not exist there.
+# raphael-6.12 kernel: its own cmdline, the msm-5.4 knobs do not exist there.
 BOARD_KERNEL_CMDLINE := printk.devkmsg=on clk_ignore_unused pd_ignore_unused panic=60 androidboot.hardware=qcom androidboot.memcg=1 swiotlb=2048 androidboot.usbcontroller=a600000.dwc3
 BOARD_KERNEL_CMDLINE += androidboot.fstab_suffix=qcom
 BOARD_KERNEL_CMDLINE += msm_drm.dsi_display0=dsi_ss_fhd_ea8076_cmd_display:
-BOARD_KERNEL_CMDLINE += raphael.ro_parts=modemst1,modemst2,fsg,fsc
 BOARD_KERNEL_CMDLINE += sysctl.kernel.firmware_config.force_sysfs_fallback=1
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
+# Only the boot image keeps the factory EFS copies (fsg, fsc) read-only; the
+# live modemst1/2 are writable like stock. The recovery must be able to write every
+# partition, so it gets the plain cmdline. mkbootimg uses the last --cmdline.
+BOARD_MKBOOTIMG_ARGS := --cmdline "$(BOARD_KERNEL_CMDLINE) androidboot.super_partition=system raphael.ro_parts=fsg,fsc"
+BOARD_RECOVERY_MKBOOTIMG_ARGS :=
 ifneq ($(TARGET_IS_LEGACY),true)
 BOARD_KERNEL_IMAGE_NAME := Image
 else
@@ -97,26 +100,20 @@ endif
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_SEPARATED_DTBO := false
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-# Prebuilt raphael-6.12 kernel, dtb and the dtbo the phone runs with it.
-TARGET_FORCE_PREBUILT_KERNEL := true
-TARGET_PREBUILT_KERNEL := device/xiaomi/raphael-kernel/Image.gz
-BOARD_PREBUILT_DTBIMAGE_DIR := device/xiaomi/raphael-kernel/dtbs
-BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/raphael-kernel/dtbo.img
+BOARD_RECOVERY_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_KERNEL_NO_GCC := true
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8150
-TARGET_KERNEL_CONFIG := \
-    vendor/sm8150-qgki_defconfig \
-    vendor/debugfs.config \
-    vendor/xiaomi/sm8150-common.config
+TARGET_KERNEL_CONFIG := raphael_android_defconfig raphael/ksu.config
+TARGET_KERNEL_DTB := qcom/sm8150-xiaomi-raphael.dtb
 
 # Build the kernel with the same clang as the standalone AnyKernel3
 # releases instead of whatever get_clang_version.py picks, so a prebuilts
 # bump can't silently change the kernel toolchain.
-TARGET_KERNEL_CLANG_VERSION := r596125
+TARGET_KERNEL_CLANG_VERSION := r547379
 
 # The "Linux version" banner (/proc/version) embeds the build machine's
 # user@host unless told otherwise. Use the project name instead.
-TARGET_KERNEL_ADDITIONAL_FLAGS := KBUILD_BUILD_USER=RaphGhost KBUILD_BUILD_HOST=RaphGhost
+TARGET_KERNEL_ADDITIONAL_FLAGS := KBUILD_BUILD_USER=RaphGhost KBUILD_BUILD_HOST=RaphGhost LLVM=1 LLVM_IAS=1
 
 # Media
 TARGET_USES_ION := true
