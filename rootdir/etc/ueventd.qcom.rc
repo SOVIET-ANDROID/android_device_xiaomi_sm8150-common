@@ -398,6 +398,9 @@ firmware_directories /vendor/firmware_mnt/image/
 #KGSL
 /sys/class/kgsl/kgsl-3d0    perfcounter              0660    root    shell
 
+# Power HAL raises this to 300 MHz for the launch burst, then restores 37.5 MHz.
+/sys/class/devfreq/1d84000.ufshc min_freq           0666    root    root
+
 # sys-fs display
 /sys/class/graphics/fb*     hpd                      0664    system  graphics
 /sys/class/graphics/fb*     res_info                 0664    system  graphics

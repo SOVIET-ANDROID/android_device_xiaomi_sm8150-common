@@ -547,6 +547,18 @@
       "DefaultIndex": 0,
       "ResetOnInit": true,
       "Type": "Event"
+    },
+    {
+      "Name": "UFSMinFreq",
+      "Paths": [
+        "/sys/class/devfreq/1d84000.ufshc/min_freq"
+      ],
+      "Values": [
+        "37500000",
+        "300000000"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
     }
   ],
   "Actions": [
@@ -747,21 +759,9 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "GPUForceClkOn",
-      "Duration": 3000,
-      "Value": "1"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "GPUForceRailOn",
-      "Duration": 3000,
-      "Value": "1"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "GPUIdleTimer",
-      "Duration": 3000,
-      "Value": "500"
+      "Node": "UFSMinFreq",
+      "Duration": 1000,
+      "Value": "300000000"
     },
     {
       "PowerHint": "LAUNCH",
